@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+
+    </script>
+</head>
+<style>
+    *{
+        margin: 0 ; 
+        padding: 0;
+        list-style-type: none;
+    }
+    .pagWarp{
+        height: 40px;
+        box-shadow: 0 2px 5px #b6b6b6;
+        position: absolute;
+        border-radius: 2px;
+        right: 42%;
+        top: 430px;
+    }
+    #btnL,#btnR{
+        line-height: 40px;
+        cursor: pointer;
+    }
+    #btnL{
+        float: left;
+    }
+    #btnR{
+        float: right;             
+    }
+    .pagWarp ul{        
+        height: 40px;
+        margin: 0 auto;
+        float: left;
+        text-align: center;
+        line-height:40px;
+        width: 80px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .pagWarp ul li{
+        float: left;
+        text-align: center;
+        line-height: 40px;
+        padding: 0 4px;
+    }
+    .active{
+        color: blue;
+    }
+
+    /* 商品列表样式 */
+.list{
+    width: 80%;
+    margin: 20px auto;
+}
+.list:after{
+    content:'';
+    display: block;
+    clear: both;
+}
+.list li{
+    padding:2%;
+    width: 15%;
+    float: left;
+    height: 300px;
+    color: #666;
+    border-right: 1px solid #b6b6b6;
+      box-shadow: 2px 2px 5px #b6b6b6;  
+      margin-left: 8px;
+      margin-top: 20px;
+}
+.list li h2{
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+}
+.list .img{
+    width: 100%;
+    border: 1px solid #b6b6b6;
+    height: 180px;
+}
+.list input[type=button]{
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #b6b6b6;
+    width: 100px;
+    height: 80px;
+}
+
+</style>
+
+<body>	
+    <ul class="list" id="list">
+       <!--  <li>
+          <img src="" alt="" class='img'>        
+          <h2>商品名称:<span>洗面奶</span></h2>
+          <h2>商品介绍:<span>好用，曼秀雷敦</span></h2>
+          <h2>商品价格:<span>100</span></h2>
+        </li> -->
+    </ul>
+
+    <div class="pagWarp" id="pageWarp">
+        <li id="btnL">上一页</li>
+        <ul id="ul">
+             
+        </ul>
+        <li id="btnR">下一页</li>
+    </div>
+</body>
+<script src="ajax.js"></script>
+<script>
+    function Paging(){
+        this.list = document.getElementById("list");
+        this.btnL = document.getElementById("btnL");
+        this.btnR = document.getElementById("btnR");
+        this.ul = document.getElementById("ul");
+        this.pageNum = 0;
+        this.load();
+    }
+
+//-------------------绑定事件--------------------
+
+    Paging.prototype.init = function(){
+        var that = this;
+        this.allpageNum = Math.ceil(this.json.length / 5);
+        console.log(this.allpageNum);
+        this.btnL.onclick = function(){
+            that.changePage("left");
+        }
+        this.btnR.onclick = function(){
+            that.changePage("right");
+        }
+        this.Rendering();
+        this.insertPagenNmber();
+
+        for(var i = 0; i < this.allpageNum ; i++){
+            this.aSpan[i].index = i;
+            this.aSpan[i].onclick = function(){
+                that.pageNum = this.index
+                that.Rendering();
+                that.changePage()
+            }
+        }
+    }
+
+//-------------------换页---------------------------
+
+    Paging.prototype.changePage = function(str){
+        if(str == "right"){
+            if(this.pageNum == this.allpageNum - 1){
+                this.pageNum = 0;
+            }else{
+                this.pageNum++;
+            }
+        }else if(str == "left"){
+            if(this.pageNum == 0){
+                this.pageNum = this.allpageNum - 1;
+            }else{
+                this.pageNum--;
+            }
+        }
+        
+        this.Rendering();
+
+        //--------点击改变下标样式
+        for(var i = 0; i < this.allpageNum; i++){
+            this.aSpan[i].style.color  = "";
+        }
+
+        this.aSpan[this.pageNum].style.color = "blue";
+    }
+
+//-------------------渲染页面-----------------------
+
+    Paging.prototype.Rendering = function(page){
+        if(page){
+            this.pageNum = page 
+        }
+        var html = "";
+        for(var i = 5 * this.pageNum; i < 5 * (this.pageNum + 1); i++ ){
+            if(i <= this.json.length - 1){
+                 html += 
+                        `<li>
+                          <img src="${this.json[i].url}" alt="" class='img'>        
+                          <h2>商品名称:<span>${this.json[i].name}</span></h2>
+                          <h2>商品介绍:<span>${this.json[i].tip}</span></h2>
+                          <h2>商品价格:<span>${this.json[i].price}</span></h2>
+                        </li>`
+            }      
+        }
+        this.list.innerHTML = html;
+    }
+
+//-------------------插入页码---------------------
+
+    Paging.prototype.insertPagenNmber  = function(){
+        var html = "";
+        for(var i = 0; i < this.allpageNum; i++){
+            html += `<span>${i + 1}</span>`
+        }
+        this.ul.innerHTML = html; 
+        this.aSpan = this.ul.children;
+        this.aSpan[0].style.color = "blue"
+    }
+
+//-------------------跨域接受数据--------------------
+
+    Paging.prototype.load = function(){
+        var that = this;
+        jsonp("http://10.9.163.37/jsonp/jsonp.php?callback=cb",fn)
+        function fn(res){
+            that.json = res;
+            that.init();
+        }
+    }
+
+    new Paging();
+</script>
+</html>

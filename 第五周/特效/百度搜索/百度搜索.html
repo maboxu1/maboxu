@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+
+
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+
+
+		#search{
+			width: 600px;
+			margin:0 auto;	
+			margin-top: 300px;
+			position: relative;
+		}
+		#search input{
+
+			width: 480px;
+			height: 100%;
+			border: 1px solid #b6b6b6;
+			height: 20px;
+		    padding: 9px 7px;
+		    font: 16px arial;
+		    border: 1px solid #b8b8b8;
+		    border-bottom: 1px solid #ccc;
+		    border-right: 0;
+		    vertical-align: top;
+		    outline: none;
+		    box-shadow: none;
+		    -webkit-appearance: textfield;
+		    background-color: white;
+		    -webkit-rtl-ordering: logical;
+		    user-select: text;
+
+		}
+
+		#search button{
+			cursor: pointer;
+			box-sizing: border-box;
+		    width: 97px;
+		   	height: 40px;
+		    line-height: 38px;
+		    padding: 0;
+		    border: 0;
+		    background: none;
+		    background-color: #38f;
+		    font-size: 16px;
+		    color: white;
+		    box-shadow: none;
+		    font-weight: normal;
+		 	margin-left: -20px;
+		}
+		
+		.result{
+			position: absolute;
+			
+			padding: 9px 7px;
+			background: #ddd;
+
+		}
+
+		.search-res{
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 480px;
+			border: 1px solid #b6b6b6;
+			border-top: none;
+		}
+
+		.search-res li{
+			list-style-type: none;
+			line-height: 20px;
+			padding: 2px 5px;
+			border-bottom: 1px solid #b6b6b6;
+		}
+	
+	</style>
+
+
+</head>
+<body>
+	
+	<div id="search">
+		<input type="text" id="txt">
+		<button>嗖嗖嗖一下</button>
+		<ul class="search-res"></ul>	
+	</div>
+<script>
+	var  oTxt = document.getElementById("txt");
+	var oSearch = document.querySelector(".search-res");
+	var timer = null;
+	oTxt.onkeydown = function(){
+		var that = this;
+		clearTimeout(timer);
+		timer = setTimeout(function(){
+			jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+ that.value +"=&json=1&p=3&sid=22084_1436_13548_21120_22036_22073&req=2&csor=0&cb=fn",Rendering)
+		},500)
+	}
+
+//------------渲染页面
+
+	function Rendering(res){
+		var html = ""
+		for(var i = 0; i < res.s.length; i++){
+			html += `<li>${res.s[i]}</li>`
+		}
+		oSearch.innerHTML = html; 
+	}
+
+//------------封装jsonp       单例模式
+
+	function jsonp(url,callback){
+		window.fn = function(res){
+			callback(res)
+		}
+		var jsonEle = document.getElementById("jsonP")
+		if(jsonEle){
+			jsonEle.remove();
+		}
+		var script = document.createElement("script");
+		script.src = url;
+		script.id = "jsonP";
+		document.body.appendChild(script);
+	}
+</script>
+</body>
+</html>

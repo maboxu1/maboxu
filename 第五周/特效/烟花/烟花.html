@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.container{
+			width: 80%;
+			height: 600px;
+			border: 2px solid red;
+			background: #000;
+			margin:20px auto;
+			cursor: pointer;
+			position: relative;
+			left: 0;
+			top: 0;
+			overflow: hidden;
+		}
+		.fire{
+			width: 10px;
+			height:10px;
+			position: absolute;
+			bottom: 0;
+			background: pink;
+		}
+		.smallfire{
+			width: 10px;
+			height:10px;
+			position: absolute;
+			bottom: 0;
+			background: pink;
+		}
+	</style>
+<body>
+	
+	<div class="container" id="container"></div>
+	
+</body>
+<script src="move.js"></script>
+<script>
+	var oContainer = document.getElementById("container");
+
+	oContainer.onclick = function(event){
+		var evt = event || window.event;
+		var left = evt.offsetX;
+		var top = evt.offsetY;
+		var position = {
+			left:left,
+			top:top
+		}
+		new FireWwork(position,this)
+	}
+
+
+
+	function FireWwork(position,wrap){
+		this.position = position;
+		this.wrap = wrap;
+		this.init();
+	}
+
+	FireWwork.prototype.init = function(){
+		this.ele = document.createElement("div");
+		this.ele.className = "fire";
+		this.ele.style.left = this.position.left + "px";
+		this.wrap.appendChild(this.ele);
+		this.move();
+		
+	}
+
+	FireWwork.prototype.move = function(){
+		var that = this;
+		move(this.ele,{
+			top:this.position.top
+		},function(){
+			that.ele.remove()
+			that.smallfire();
+		})
+	}
+
+	FireWwork.prototype.smallfire = function(){
+		for(let i = 0; i < 15 + Math.round(Math.random() * 30); i++){
+			let div = document.createElement("div");
+			div.style.left = this.position.left + "px";
+			div.style.top = this.position.top + "px";
+			div.className = "smallfire";
+			this.wrap.appendChild(div);
+			var start = Math.round(Math.random()*360);
+			var x = Math.round(Math.cos(Math.PI / 180 * start) * 200 + this.position.left)
+			var y = Math.round(Math.sin(Math.PI / 180 * start) * 200 + this.position.top)
+			var randomposition = {
+				left:x,
+				top:y			
+			}
+			move(div,randomposition,function(){
+				div.remove()
+			})
+		}
+	}
+
+</script>
+</html>

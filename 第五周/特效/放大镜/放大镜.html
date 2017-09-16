@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	img{
+		width: 100%;
+		height: 100%;
+	}
+	#s_box{
+		width: 400px;
+		height: 300px;
+		position: relative;
+		left: 100px;
+		top: 100px;
+	}
+	#s_box .position_box{
+		width: 100px;
+		height: 75px;
+		background: #b6b6b6;
+		opacity: 0.6;
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		display: none;
+	}
+	#s_box .mark_box{
+		width: 400px;
+		height: 300px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 10;
+	}
+	#b_box{
+		width: 400px;
+		height: 300px;
+		overflow: hidden;
+		position: relative;
+		left: 600px;
+		top: -200px;
+		display: none;
+	}
+	#b_box_all{
+		position: absolute;
+		width:1200px;
+		height: 900px; 
+		left: 0;
+	}
+	
+</style>
+</head>
+<body>
+
+	<div id="s_box">
+		<div class="mark_box"></div>
+		<img src="1.jpg" alt="">
+		<div class='position_box'></div>
+	</div>
+	<div id="b_box">		
+		<div id="b_box_all">
+			<img src="1.jpg" alt="">
+		</div>		
+	</div>
+</body>
+<script src="move.js"></script>
+<script>
+
+	function Magnifier(){
+		this.s_box = document.getElementById("s_box");
+		this.position_box = document.querySelector(".position_box");
+		this.b_box_all = document.getElementById("b_box_all");
+		this.b_box = document.getElementById("b_box");
+		this.init()
+	}
+
+//------------------------绑定事件--------------------------
+
+	Magnifier.prototype.init = function(){
+		var that = this;
+		this.s_box.onmouseover = function(){
+			that.boxDisplay("over")
+		}
+		this.s_box.onmouseout = function(){
+			that.boxDisplay("out")
+		}
+		this.s_box.onmousemove = function(event){
+			var evt = event || window.event;
+			var left = evt.offsetX;
+			var top = evt.offsetY;
+			that.move(left,top);
+		}
+	}
+
+//-------------------------显示隐藏的框----------------------
+
+	Magnifier.prototype.boxDisplay = function(bDisplay){
+		if(bDisplay == "over"){
+			this.position_box.style.display = "block";
+			this.b_box.style.display = "block";
+		}else{
+			this.position_box.style.display = "none";
+			this.b_box.style.display = "none";
+		}
+	}
+
+//-------------------------鼠标移动----------------------------
+
+	Magnifier.prototype.move = function(left,top){
+		var offsetX =  left - (this.position_box.offsetWidth)/2; 
+		var offsetY =  top - (this.position_box.offsetHeight)/2; 
+		var Swidth = this.s_box.offsetWidth - this.position_box.offsetWidth;
+		var Sheight = this.s_box.offsetHeight - this.position_box.offsetHeight;
+		var Bwidth = this.b_box_all.offsetWidth - this.b_box.offsetWidth;
+		var Bheight = this.b_box_all.offsetWidth - this.b_box.offsetWidth;
+
+		//----------边界检测
+		if(offsetX >= Swidth){
+			offsetX = Swidth;
+		}else if(offsetX < 0){
+			offsetX = 0;
+		}
+		if(offsetY >= Sheight){
+			offsetY = Sheight;
+		}else if(offsetY < 0){
+			offsetY = 0;
+		}
+		this.position_box.style.left = offsetX + "px";
+		this.position_box.style.top = offsetY  + "px";
+
+		//---------大图成比例移动
+		var x = parseInt((offsetX / Swidth) * 100);
+		var y = parseInt((offsetY / Sheight) * 100);
+		this.b_box_all.style.left = - (x * Bwidth / 100) + "px";
+		this.b_box_all.style.top = - (y * Bheight / 100) + "px";
+
+	}
+
+	new Magnifier();
+</script>
+</html>
