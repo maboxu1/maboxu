@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+		*{
+			margin:0 auto;
+			padding:0;
+		}
+
+		#box{
+			width:100px;
+			height:100px;
+			background:yellow;
+			position: absolute;
+		}
+
+		.box{
+			width:100px;
+			height:100px;
+			margin:20px auto;
+			background: pink;
+		}
+
+		#con{
+			width: 100px;
+			height:100px;
+			background: black;
+			margin-bottom: 20px;
+		}
+
+		.con{
+			width: 100px;
+			height:100px;
+			background: orange;
+		}
+
+		#nav li{
+			font-weight: 900;
+			text-align: center;
+			list-style: none;
+			margin-top:10px;
+			background: yellow;
+		}
+
+		#show{
+			width: 100px;
+			height:100px;
+			background: yellow;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<button id="btn03">点击</button>
+	<div id="box"></div>
+	<div class="box"></div>
+	<p id="con"></p>
+	<p class="con"></p>
+	<ul id="nav">
+		<li>詹姆斯</li>
+		<li>杜兰特</li>
+		<li >威斯布鲁克</li>
+		<li style="height: 114px">
+			<ul class="weisao">
+				<li>哈登</li>
+				<li>哈登</li>
+				<li>哈登</li>
+				<li>哈登</li>
+			</ul>
+		</li>
+		<li>莱昂纳德</li>
+		<li style="height: 21px"></li>
+		<li>库里</li>
+	</ul>
+	<button id="btn">显示</button>
+	<button id="btn01">隐藏</button>
+	<button id="btn02">显示隐藏</button>
+	<div id="show"></div>
+</body>
+<script src="jquery-1.11.3.js"></script>
+<script>
+
+//----------------------jQuery------------------------
+
+// 1、jquery的使用方法:
+
+//	(1)引入方法同js;
+//	(2)开始操作:
+//	eg:		
+		// jQuery(document).ready(function(){
+		// 	alert(1)
+		// })   //----------经典版
+
+		// $(document).ready(function(){
+		// 	alert(2)
+		// })  //-----------简化版
+
+		// $(function(){
+		// 	alert(3)
+		// })   //----------极简版(常用)
+
+// 2、jquery的选择器:(js选择的叫原生的DOM对象,jquery选择的叫做jqueryDOM对象);
+//	  两种对象使用方法不一致,方法不通用;
+//    想要互相使用的转换方法:	
+//		eg:
+			var oBox = document.getElementById("box");
+			console.log(oBox); //-------<div id="box"></div>;
+			$("#box");
+			console.log($("#box"))  //-------[div#box,context:document,selector:"#box"];
+
+			$(oBox).css({      //--------原生DOM对象使用jQuery的方法;
+				background:"pink"
+			})
+
+			$("#box")[0].style.background = "orange"; //-------jQuery对象使用原生的方法;
+			$("#box").get(0).style.background = "blue"; //-----用了get方法;
+
+
+//	a、简单选择器:
+//		(1)$("div"):获取所有div的DOM元素;
+//      (2)$("#box"):获取id为"box"的DOM对象;
+//		(3)$(".class"):获取class为"box"的DOM对象;
+
+//	b、进阶选择器:
+//		(1)群组选择器:$("ul,div,p")
+//		(2)后代选择器:$("ul li") 有find()方法:$("ul").find("li");想要找的后代;
+//		(3)统配选择器:$("*") 选择所有元素,包括"html,body,head,title,meat,script"
+//	eg:
+		$(function(){
+			$("div,p").css({
+				background:"yellow"
+			})  //--------群组选择:"div","p"的background为"yellow";
+
+			$("ul li").css({
+				background:"pink"
+			}) //---------后代选择器:"ul"下的"li"的background为"pink";
+
+			$("ul *").css({
+				background:"orange"
+			}) //---------统配选择器:可以把所有"ul"下的元素的background改为"orange";
+		})
+
+//	c、高级选择器:
+//		(1)子选择器:$("#nav>li") 有children()方法:$("#nav").children(li);想找的子元素;
+//		(2)next选择器:$(".box+p") 有next()方法:$(".box").next("p");
+//		(3)nextAll选择器:$("#box~p") 有nextAll方法:$("#box").nextAll("p");
+//	eg:
+		$(function(){
+			$("#nav>li").css({
+				background:"pink"
+			}) //--------子选择器:"#nav"下的子"li"的background为"pink",再下一级不会改变;
+
+			$(".box+p").css({
+				background:"red"
+			}) //--------next选择器:".box"同级中的后一个DOM元素"p"的background为"red";
+
+			$("#box~p").css({
+				background:"blue"
+			})//--------nextAll选择器:".box"同级中的后所有DOM元素"p"的background为"blue";
+		})
+
+//	d、属性选择器:
+//		(1)$("input=[name]")
+//		(2)$("input=[name = xxx]")
+//		(3)$("input[button][name = xxx]")
+
+// e、过滤选择器
+//		(1)$("#nav li:even"):选择li的偶数行;
+//		(2)$("#nav li:odd"):选择li的奇数行;
+//		(3)$("#nav li:empty"):选取li中不含子元素或空文本的元素;
+//		(4)$("#nav:has(.li)"):选取子元素中含有".li"类名的元素; 有一个has()方法;
+//		(5)$("#nav li:eq(1)"):选择对应下标的元素;
+//		(6)$("li:first"):选取第一个元素;
+//		(6)$("li:last"):选取最后一个元素;
+
+//		eg:
+			$(function(){
+				$("#nav>li:even").css({
+					background:"black"
+				})//------------------选择li的偶数行;
+
+				$("#nav>li:odd").css({
+					background:"yellow"
+				})//------------------选择li的奇数行;
+
+				$("#nav>li:empty").css({
+					background:"blue"
+				})//------------------选取li中不含子元素或空文本的元素;
+
+				$("#nav").has(".weisao").css({
+					background:"red"
+				})//----------------选取了含有类名为".weishao"的ul
+
+				$("#nav li:eq(1)").css({
+					background:"green"
+				})//------------------选择对应#nav下的第2个li元素;
+			})
+
+//	f、end()方法:终止上个选择器的遍历,回到上个选择条件;
+//		eg:
+			$(function(){
+				$("#nav").find("li")
+				.css({
+					background:"gray"
+				})
+				.end()
+				.css({
+					background:"yellow"
+				})
+			})
+
+// 3、jquery动画:
+//	A、非自定义动画:
+//		(1)hide():隐藏;(可设置数字(2000)，英文(slow/fast))
+//		(2)show():显示;
+//		(3)toggle():显示隐藏;
+//		(4)slidUp():向上滑动;
+//		(5)slidUp():向下滑动;
+//		(6)slideToggle():向上向下滑动;
+//		(7)fadeOut():淡出;
+//		(8)fadeIn():淡入;
+//		(9)fadeToggle():淡入淡出;
+
+//	B、自定义动画:
+//		animate(): 有三个参数:动画执行目标、执行时间、回调函数;
+//		queue(function(next){next()}):(在animate执行结束后再执行一个动画);
+//		stop();清空当前队列;
+//			eg:
+				$(function(){
+					$("#btn").click(function(){
+						// $("#show").show(2000);
+						$("#show").animate({
+							width:"300",
+							height:"300"
+						},2000)
+
+						$("#show").animate({
+							width:"50",
+							height:"50"
+						},2000)
+					})
+
+					$("#btn01").click(function(){
+						$("#show").hide("fast");
+					})
+
+					$("#btn02").click(function(){
+						$("#show").toggle(1000)
+					})
+
+
+					$("#btn03").click(function(){
+						$("#box")
+							.animate({
+								left:200
+							},1000)
+							.animate({
+								top:200
+							},1000)
+							.animate({
+								left:0
+							},1000)
+							.animate({
+								top:23
+							},1000)
+							.queue(function(next){
+								$("#box").css({
+									background:"red"
+								})
+								next();
+							})
+							.animate({
+								width:400
+							})
+					})				
+				})
+</script>
+</html>
