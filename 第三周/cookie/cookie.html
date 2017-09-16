@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		span{width:100px;height:100px;background: pink;position: absolute;}
+	</style>
+</head>
+<body>
+	<span></span>
+</body>
+
+<script>
+	
+//--------------------cookie-----------------------
+
+// 1、通信方式:
+//  (1)TCP:(面向连接的协议)
+//       安全可靠，但是消息发送后需要确认，发送失败则重复发送，比较磨叽;
+//  (2)UDP:(面向数据的协议)
+//       不太靠谱，无需建立连接，无需对方确认，通常用于语音、视频等通信;
+//  (3)HTTP:(无状态协议)
+//       基于TCP协议的一种高级协议，用于客户端和服务器直接的通信，
+//		 但每次收到返回页面连接都会断开(针对于这个问题诞生了cookie技术);
+
+// 2、cookie(回话跟踪技术)(是浏览器的缓存)
+//   缓存:数据交换的缓冲区;
+//   每次断开连接后服务器给发了一个身份牌，这样登录后再跳转到其它页面，
+//   服务器还是识别这个账号身份，不用每次跳转输入一次信息;
+
+// 3、cookie的特性:
+//   在同一个域名下有效，每条大小为4~10k，最多存储50条，有时效性;
+
+// 4、cookie的使用:
+//	 document.cookie = "name=value"; 
+//   path:为路径;
+//   expires=day:有效时间;
+
+// 5、cookie的封装:
+// (1)设置cookie
+	function setCookie(name,value,day,path){
+		var d = new Date;
+		d.setDate(d.getDate() + day);
+		document.cookie = name+"="+value+";path="+path+";expires="+d;
+	}
+
+// (2)获取cookie
+	function getCookie(name){
+		var sCookie = document.cookie;
+		var aCookie = sCookie.split("; ");
+		for(var i = 0; i < aCookie.length; i++){
+			var cookieItem = aCookie[i].split("=");
+			if(cookieItem[0] == name ){
+				return cookieItem[1]
+			}
+		}
+		return ""
+	}
+
+// (3)删除cookie
+	function removeCookie(name,path){
+		setCookie(name,"",-1,path)
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		li{width:300px;height:50px;border:2px solid #666;text-align:center;line-height:50px;font-size:30px;color:red;}
+	</style>
+</head>
+<body>
+	<ul id="nav">
+		<li>詹姆斯</li>
+		<li>杜兰特</li>
+		<li>科比</li>
+		<li>韦德</li>
+		<li>安东尼</li>
+		<li>霍华德</li>
+	</ul>
+<script>
+//-----------------------事件--------------------------
+
+// 1、事件冒泡:由内向外依次触发所有同名事件;
+//	阻止事件冒泡:
+//   eg:
+		document.onclick = function(event){
+			var evt = event || window.event;
+			if(evt.stopPropagation){
+				evt.stopPropagation()
+			}else{
+				evt.cancelBubble = true;
+			}
+		}
+
+// 2、鼠标事件:
+//	(1)onmousedown:鼠标按下;
+//	(2)onmouseup:鼠标抬起;
+//	(3)onmouseover:鼠标滑动;
+//	(4)onmousemove:鼠标移动;
+//	(5)oncontextmenu:鼠标右键单击;
+// eg:
+	document.onmousemove = function(event){
+		var evt = event || window.event;
+		var clientX = evt.clientX      //---------------距浏览器左侧的距离;
+		var clientY = evt.clientY      //---------------距浏览器上侧的距离;
+	}
+
+// 3、键盘事件:
+//	(1)onkeydown
+//	(2)onkeyup
+// eg:
+	document.onkeydown = function(event){
+		var evt = event || window.event;
+		var keyCode = evt.keyCode || evt.which;
+	}
+
+// 4、滚动条事件:
+//  scrollTop 距离顶部距离;
+//  返回顶部:
+//  eg:
+	 oBtn.onclick = function(){
+	 	if(document.body.scrollTop == 0){
+	 		document.documentElement.scrollTop = 0  // 火狐
+	 	}else{
+	 		document.body.scrollTop = 0; // 谷歌
+	 	}
+	 }
+//	eg:
+	 window.onscroll = function(){
+
+	 }
+
+// 5、默认行为:浏览器自身带有的事件;
+//	eg:
+	 document.oncontextmenu = function(event){
+	 	var evt  =event || window.event;
+	 	if(evt.preventDefault){
+	 		evt.preventDefault();  //非IE
+	 	}else{
+	 		window.event.returnvalue = false;  //IE
+	 	}
+	 } 
+
+// 6、移除事件: eg:document.oncontextmenu = null;
+
+// 7、事件监听: 可以绑定多个处理事件;
+//	eg:
+	 function addEvent(DOM,evtName,callback){
+	 	if(DOM.addEventListener){
+	 		DOM.addEventListener(evtName,callback)
+	 	}else{
+	 		DOM.attachEvent("on"+evtName,callback);
+	 	}
+	 }
+
+	 addEvent(oBtn,"click",fn)
+	 //DOM:绑定事件的元素;
+	 //evtName:事件名去掉"on",要将其有""括起来;
+	 //callback:函数名;
+
+	 function removeEvent(DOM,evtName,callback){
+	 	if(DOM.removeEventListener){
+	 		DOM.removeEventListener(evtName,callback)
+	 	}else{
+	 		DOM.detachEvent("on"+evtName,callback)
+	 	}
+	 }  //移除事件
+
+// 8、事件委托: 委托给父级(evt.target);
+	var oNav = document.getElementById("nav");
+	var aLi = oNav.children;
+	console.log(aLi)
+	
+	oNav.onclick = function(event){
+		var evt = event || window.event;
+		for(var i = 0; i < aLi.length; i++){		
+			if(aLi[i] == evt.target){
+				alert(evt.target.innerHTML);
+				break;
+			}
+		}
+	}
+
+// 9、浏览器宽度和高度:
+	var cClientx = document.documentElement.clientWidth || document.body.clientWidth;
+	var cClienty = document.documentElement.clientHeight || document.body.clientHeight;
+</script>
+</body>
+</html>
