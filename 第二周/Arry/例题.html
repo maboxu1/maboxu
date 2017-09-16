@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+
+<script>
+	
+// 1、冒泡排序法:
+
+	var arr = [12,21,44,3,22,1,17];
+	for(var a = 0; a < arr.length - 1; a++){
+		for(var i = 0; i < arr.length - a; i++){
+			if(arr[i] > arr[i + 1]){
+				var ls = arr[i]
+				arr[i] = arr[i + 1]
+				arr[i + 1] = ls;
+			}
+		}
+	}
+	console.log(arr);	
+
+// 2、选择排序法:
+
+	var arr = [12,21,44,3,22,1,17];
+	for(var i = 0; i < arr.length - 1; i++){
+		var min = arr[i];
+		var index = i
+		for(var j = i + 1; j < arr.length; j++){			
+			if(min > arr[j]){
+				min = arr[j];
+				index = j
+			}		
+		}
+		arr[index] = arr[i]
+		arr[i] = min
+	}
+	console.log(arr)
+
+// 3、数组去重:
+
+	// var arr = [1,1,2,2,33,2,44,55,33,14,10,14]
+	// arr.sort();
+	// console.log(arr);
+	// var newarr = [];
+	// for(var i = 0; i < arr.length; i++){
+	// 	if(newarr.indexOf(arr[i]) == -1){
+	// 		newarr.push(arr[i]);
+	// 	}
+	// }
+	// console.log(newarr)
+
+// 4、定义一个30项的数组，数组的每一项要求是1~10的随机数，在每间隔 5个数 之后，求出前五个数的平均值:
+
+	// var arr = [];
+	// var index = 0;
+	// for(var i = 0; i < 30; i++){
+	// 	if(index % 5 == 0 && index > 0){
+	// 		console.log(index)
+	// 		 var res = 0;
+	// 		for(var a = index - 5; a < index; a++){
+	// 			res = res + arr[a];
+	// 			console.log(res)
+				
+	// 		}	
+	// 		arr.push(res / 5);		
+	// 	}else{
+	// 		arr.push(Math.round(Math.random() * 9 + 1))	
+	// 	}	
+	// 	index++
+	// }
+	// console.log(arr);
+
+
+
+</script>
+
+</html>

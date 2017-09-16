@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+//-----------------------------BOM--------------------------------------
+
+// 1、BOM:浏览器对象模型(window);
+//	var a = 10;
+//	console.log(window);//我们的全局变量是放在window对象里的;
+//	js 帮忙 省略了 window.   ;
+//	console.log(window.a);
+//	但凡是带winodw.的东西 window. 都可以省略;(事件对象兼容除外);
+//	window 对象是 浏览器的 一个具象化的体现;
+
+// 2、window下的子对象;
+//	控制地址栏的; 取值 ,  设置值;
+// 	href => 地址栏值的属性;
+// 	console.log(window.location.href);
+// 	console.log(location.href);
+// 利用href跳转页面的时候的 , 把跳转用函数包裹住,不要让他立即执行;
+// window.location.href = "http://www.baidu.com";
+// JS 应用在逻辑之后; => a标签跳转有可能先执行跳转; 导致代码不生效,我们用js替代;
+// 刷新功能; 
+// *把刷新用函数包裹住,不要让他立即执行;
+
+// location.reload();  F5
+// location.reload(true); 默认参数为false; 以可以传递 true;   ALT + F5;
+
+// 底层刷新不调用缓存;
+
+	//var obj = {
+		//name:"hello"
+	//}
+	//console.log(obj.toSource());
+	// console.log(navigator.appName);    当前浏览器名字
+	// console.log(navigator.appVersion);  当前浏览器版本
+	// console.log(navigator.platform);    当前计算机的操作系统
+	// console.log(navigator.userAgent);   返回浏览器信息
+
+ // (1) donfirm 用法
+	// function qq(){
+		// 	var a = confirm("你是猪咩？")
+		// 	if(a){
+		// 		confirm("你很勇敢 能够直面自己")
+		// 	}else{
+		// 		confirm("好好想想 自己是什么玩意 哼~")
+		// 		qq()
+		// 	}
+	// }
+	// qq()
+
+// (2) prompt 用法
+
+	// function qq(){
+		// 	var a = prompt("快说你是不是猪")
+		// 	if(a == "你是不是猪"){
+		// 		alert("你很机智")
+		// 	}else{
+		// 		alert("头很铁")
+
+		// 	}
+		// }
+		// qq()
+
+
+
+
+// 3、事件:
+//  (1)onload:加载事件网页加载完毕后执行;
+//  (2)onblur:失去焦点事件;
+//  (3)onmouseover:鼠标滑过;
+//  (4)onmouseout:鼠标滑出;
+//  (5)onscroll:滚动事件;
+//  (6)scrollIntoView():可以让滚动条一直在最下面;
+//  (7)window.onscroll事件:当鼠标滚动时或进度条被拖动时会触发事件;
+
+     // document.documentElement.scrollTop     //火狐    代表垂直的滚动条，向下滚动的距离
+     // document.body.scrollTop                //chrome  代表垂直的滚动条，向下滚动的距离
+     // document.documentElement.scrollLeft
+     // document.body.scrollLeft
+
+
+
+</script>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id="bd">
+<!-- 	<img src="images/0.jpg" alt="">
+	<img src="images/1.jpg" alt="">
+	时
+	<img src="images/2.jpg" alt="">
+	<img src="images/3.jpg" alt="">
+	分
+	<img src="images/4.jpg" alt="">
+	<img src="images/5.jpg" alt="">
+	秒 -->
+<!-- 
+	<input type="text" id="txt">
+	<button id="btn">发送</button>
+	<p id="neirong">显示内容</p> -->
+</body>
+
+<script>
+// 1、电子时钟:
+
+	// timre = setInterval(function(){
+	// 	var oBd = document.getElementById("bd")
+	// 	var d = new Date(); 
+	// 	var hour = d.getHours() + "";
+	// 	var minute = d.getMinutes() + "";
+	// 	var second = d.getSeconds() + "";
+	// 	console.log(hour);
+	// 	console.log(minute);
+	// 	console.log(second);
+	// 	var sHour = [];
+	// 	if(hour < 10){
+	// 		sHour.push(0);
+	// 		sHour.push(hour[0]);		
+	// 	}else{
+	// 		sHour.push(hour[0]);
+	// 		sHour.push(hour[1]);
+	// 	}
+	// 	var sMinute = [];
+	// 	if(minute < 10){
+	// 		sMinute.push(0);
+	// 		sMinute.push(minute[0]);		
+	// 	}else{
+	// 		sMinute.push(minute[0]);
+	// 		sMinute.push(minute[1]);
+	// 	}
+	// 	var sSecond = [];
+	// 	if(second < 10){
+	// 		sSecond.push(0);
+	// 		sSecond.push(second[0]);		
+	// 	}else{
+	// 		sSecond.push(second[0]);
+	// 		sSecond.push(second[1]);
+	// 	}
+	// 	var Img = 	'<img src="images/'+ sHour[0] +'.png" alt="">'+
+	// 				'<img src="images/'+ sHour[1] +'.png" alt="">'+
+	// 				'时'+
+	// 				'<img src="images/'+ sMinute[0] +'.png" alt="">'+
+	// 				'<img src="images/'+ sMinute[1] +'.png" alt="">'+
+	// 				'分'+
+	// 				'<img src="images/'+ sSecond[0] +'.png" alt="">'+
+	// 				'<img src="images/'+ sSecond[1] +'.png" alt="">'+
+	// 				'秒'
+	// 	oBd.innerHTML = Img
+	// },1000)
+
+// 2、数码时钟:
+		
+   // var timer = null;
+   // timer = setInterval(function(){
+   // 		var oBd = document.getElementById("bd").children;
+	  // 	var d = new Date(); 
+	  // 	var hour = d.getHours() + "";
+	  // 	var minute = d.getMinutes() + "";
+	  // 	var second = d.getSeconds() + "";
+	  // 	if(hour < 10){
+	  // 		hour = 0 + hour;
+	  // 	}
+	  // 	if(minute){
+	  // 		minute = 0 + minute;
+	  // 	}
+	  // 	if(second < 10){
+	  // 		second = 0 + second;
+	  // 	}
+ 		// oBd[0].src = "images/"+ hour[0] +".jpg"
+	  // 	oBd[1].src = "images/"+ hour[1] +".jpg"
+	  // 	oBd[2].src = "images/"+ minute[0] +".jpg"
+	  // 	oBd[3].src = "images/"+ minute[1] +".jpg"
+	  // 	oBd[4].src = "images/"+ second[0] +".jpg"
+	  // 	oBd[5].src = "images/"+ second[1] +".jpg"
+
+   // })
+
+// 3、屏蔽关键字:
+	
+	// var oTxt = document.getElementById("txt");
+	// var oBtn = document.getElementById("btn");
+	// var oNeirong = document.getElementById("neirong");
+	// oBtn.onclick = function(){
+	// 	var sTxt = oTxt.value;
+	// 	sTxt=sTxt.replace("我","xxx");
+	// 	// console.log(oTxt.value[0])
+	// 	oNeirong.innerHTML = sTxt;
+	// }
+
+// 4、获取任意一个月份的天数:
+
+	// function fn(year,month){
+	// 	var d = new Date();
+	// 	d.setDate(1);
+	// 	console.log(d);
+	// 	d.setFullYear(year);
+	// 	return (d.setMonth(month) - d.setMonth(month - 1)) / 1000 /3600 / 24;
+	// }
+	// console.log(fn(2017,2));
+
+
+</script>
+
+</html>

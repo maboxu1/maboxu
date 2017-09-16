@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/0.css" id="link">
+</head>
+<body>
+	<button data-link="css/0.css">詹姆斯</button>
+	<button data-link="css/1.css">杜兰特</button>
+	<button data-link="css/2.css">威少</button>
+	<button data-link="css/3.css">哈登</button>
+	<button data-link="css/4.css">韦德</button>
+</body>
+	<script>
+		var aBtn = document.getElementsByTagName("button");
+		var oLink = document.getElementById("link");
+		console.log(aBtn);
+		for(var i = 0; i < aBtn.length; i++){
+			aBtn[i].onclick = function(){
+				oLink.href = this.getAttribute("data-link");
+			}
+		}
+	</script>
+</html>

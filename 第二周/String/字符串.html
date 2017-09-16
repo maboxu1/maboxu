@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+//------------------------字符串和对象-----------------------------
+
+// 1、ES5:严格模式("use strict")
+//	(1)伪全局变量不存在，变量不允许未被声明就被使用;
+//		eg:
+			// a = 10;
+			// console.log(a);      //-------- 报错
+
+// 	(2)重名的形参，不被允许;
+//		eg:
+			// function fn(a,b,b){
+			// 	console.log(a,b,b)
+			// }
+			// fn(1,2,3)            //-----------报错
+
+//  (3)严格模式不支持递归，禁止了arguments的很多功能;
+//  (4)this不能指向window;
+//  (5)参数不能被随意更改;
+//		eg:
+			// function fn(a,b){
+			// 	a = 10;
+			// 	b = 20;
+			// 	console.log(a,b);
+			// 	console.log(arguments[0],arguments[1]);
+			// }
+			// fn(1,2)               //-----------报错
+
+// 2、对象:储存大量数据结构;
+//	(1)对象的两种声明方式:
+//		a、var obj = {               //-----字面量声明方式;
+//				key1 : value,
+//				key2 : value,        //------key是一个变量名，为object的私有变量;
+//				key3 : value         //------value为一个具体的数据;
+//			}     
+
+//      json:数组对象，对象数组    一个沟通语言;
+//      this:是函数的关键字,当前函数(方法)所属于的对象;
+
+//      b、var obj = new Object()    //-----构造函数;
+
+// 3、字符串:
+//	(1) a、 var str = "";     //------声明字符串，用""或''都可以;前两个为String类型;最后一个为对象类型;
+//      b、 var str = '';
+//      c、 var str = new String();
+
+//  (2)indexOf():查找字符串第一次出现的位置; 
+//  (3)lastIndexOf():查找字符串最后一次出现的位置;
+//  (4)replace():替换字符串，返回新的字符串;
+//  (5)charAt(index):获取下标为index的字符;
+//  (6)charCodeAt(index):获取下标为index的字符的Unicode码;
+//  (7)toLowerCase():小写操作;
+//  (8)toUpperCase():大写操作;
+//  (9)substring(start,end):第一个参数是开头下标，第二个参数是结尾下标的后一个;
+//-------------------------------------------------------------------------返回值为截取出来的所有字符;
+
+</script>
+</html>

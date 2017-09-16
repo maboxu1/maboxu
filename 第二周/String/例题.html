@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body id="bd">
+	<p id="tishi">温馨提示</p>
+	<p>用户名<input type="text" id="tet01"></p>
+	<p>密&nbsp;码<input type="text" id="tet02"></p>
+	<button id="btn">点击</button>
+	<p><input type="text" id="yz"></p>
+	<button id="bt">验证</button>
+	<br><br>
+	<input type="text" id="num01">
+	<select name="" id="jishuan">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>	
+	</select>
+	<input type="text" name="" id="num02">
+	<button id="b">点击</button>
+</body>
+	<script>
+// 1、注册验证:
+
+    // var oTishi = document.getElementById("tishi");
+    // var oText01 = document.getElementById("tet01");
+    // var oText02 = document.getElementById("tet02");
+    // var oBtn = document.getElementById("btn");
+    // // console.log(oBtn);
+		
+	// // console.log(oText02);
+	// // console.log(oTishi);
+	// oText01.onblur = function(){
+	// 	if(isNaN(Number(oText01.value[0]))){
+
+	// 	}else{
+	// 		oTishi.innerHTML = "开头不能为数字"
+	// 	}		
+	// } 
+	// oText02.onblur = function(){
+	// 	if(oText02.value.length < 4){
+	// 		oTishi.innerHTML = "密码不能小于4位"
+	// 	}
+	// }
+	
+// 2、四位随机验证码:
+	
+	// var oYz = document.getElementById("yz");
+	// var oBt = document.getElementById("bt");
+	// oBt.onclick = function(){
+	// 	var str = "1234567890abcdefghijklmnopqrstuvwxuz";
+	// 	// console.log(str[1])
+	// 	var num = "";
+	// 	for(var i = 0; i < 4; i++){
+	// 		num = num + str[Math.round(Math.random() * (str.length - 1))];
+	// 	}
+	// 	oYz.value = num;
+	// }
+
+// 3、计算器:
+
+	// var oNum01 = document.getElementById("num01");
+	// var oNum02 = document.getElementById("num02");
+	// var oJishuan = document.getElementById("jishuan");
+ // 	var oB = document.getElementById("b");
+ // 	console.log(oNum01)
+ // 	console.log(oNum02)
+ // 	console.log(oJishuan)
+ // 	console.log(oB)
+ // 	oB.onclick = function(){
+ // 		var sNum01 = Number(oNum01.value);
+ // 		var sNum02 = Number(oNum02.value);
+ // 		if(isNaN(sNum01) || isNaN(sNum02)){
+ // 			alert("请输入数字")
+ // 		}else{
+ // 			switch(oJishuan.value){
+
+	//  			case "+" :  alert(sNum01 + sNum02); break;
+
+	//  			case "-" :  alert(sNum01 - sNum02); break;
+
+	//  			case "*" :  alert(sNum01 * sNum02); break;
+
+	//  			case "/" :  alert(sNum01 / sNum02); break;
+ // 			}
+ // 		}	
+ // 	} 
+
+	</script>
+</html>

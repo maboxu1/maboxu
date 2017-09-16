@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<div id="box">10</div>
+	<button id="btn">引爆</button>
+</body>
+<script>
+	var oBox = document.getElementById("box");
+	var oBtn = document.getElementById("btn");
+	var index = 10;
+	var timer = null;
+	oBtn.onclick = function(){
+		console.log(timer);
+		if(timer == null){
+			timer = setInterval(function(){
+				if(index == 1){
+					clearInterval(timer);
+					oBox.innerHTML = "BOOM~~BOOM"
+					timer = null;
+					index = 11;
+				}else{
+					index--;
+					oBox.innerHTML = index;
+				}
+				
+			},1000)
+		}else{
+			clearInterval(timer);
+			timer = null;
+		}
+	}
+</script>
+</html>

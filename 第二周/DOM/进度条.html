@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{width:500px;height:40px;border:2px solid gray;margin:200px auto;border-radius:15px;overflow:hidden;position:relative;}
+		#con{height:40px;background:pink;}
+		#num{position:absolute;left:47%;top:25%;}
+	</style>
+	
+</head>
+<body>
+	<div id="box">
+		<div id="con"></div>
+		<span id="num">123</span>
+	</div>
+</body>
+<script>
+	var oBox = document.getElementById("box");
+	var oCon = document.getElementById("con");
+	var oNum = document.getElementById("num");
+	var timer = null;
+	var width = 0;
+	timer = setInterval(function() {
+		
+		if(width == 500 ){
+			clearInterval(timer);
+		}
+		width++
+		oCon.style.width = width + "px";
+		oNum.innerHTML = parseInt(width / 500 * 100) + "%";
+	},30)
+</script>
+</html>

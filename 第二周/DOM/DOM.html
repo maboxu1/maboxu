@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div id="box" width="200">
+		天才
+
+		wes
+		<span></span>
+		<div class="con">
+			<h1></h1>
+			<h2></h2>
+		</div>
+		<p></p>
+	</div>
+</body>
+<script>
+//-------------DOM----------------
+
+// 1、获取元素:
+//	(1)document.getElementById("id"):ID选择器;
+//  (2)document.getElementsByTagName():标签选择器，返回数组，通常放在以a开头的变量里;
+//  (3)document.getElementsByClassName():通过class名获取元素返回的值是数组;
+//  (4)document.querySelectorAll():可以对id、class、标签等名称进行选着;以数组形式返回;
+//  (5)document.querySelector():可以对id、class、标签等名称进行选着;返回所选元素;
+//  (6)children:获取一个元素的所有子元素，并以数组的形式返回;
+//  (7)getAttribute():获取元素的属性值;
+//  (8)setAttribute():设置元素的属性值;
+//  (9)removeAttribute():删除元素的属性值;
+//  (10)document.createElement:创建标签元素;
+//  (11)appendChild():将(10)中所创建的元素插入另一个节点中;
+//  (12)remove():属于DOM;
+//		eg:
+			// var oBox = document.getElementById("box");
+			// console.log(oBox);
+			// //获取id值为"box"的标签;
+			// var aLi = document.getElementsByTagName("li");
+			// console.log(aLi);
+			// //获取页面中所有的li标签;
+			// var oCon = document.getElementsByClassName("con")
+			// console.log(oCon);
+			// //获取页面中class值为"con"的标签;
+			// var Box = document.querySelectorAll("li");
+			// console.log(Box);
+			// //获取所有li的标签;
+			// var sBox = document.querySelector(".con");
+			// console.log(sBox);
+			// //获取所有class名为"con"的标签,但不以数组形式返回;
+			// console.log(sBox.children);
+			// //获取了sBox中的所有子元素;
+			// console.log(sBox.getAttribute("class"))
+			// //获取了class名为.con的标签的class属性;
+			// console.log(sBox.setAttribute("width","200"))
+			// //class名为.con的标签设置width属性为200;
+			// console.log(sBox.removeAttribute("width"))
+			// //将上面设置的width属性删除;
+			// var h5 = document.createElement("h5");
+			// oBox.appendChild(h5);
+			// //将h5标签插入到oBox的div中;
+
+
+
+// 2、node节点:HTML文档中的所有内容都是节点
+
+// 	(1)节点的常见类型:
+// 		1  元素节点( eg: div li body );
+// 		2  属性节点( eg: class id );
+// 		3  文本节点( eg: text节点 );
+// 		8  注释节点( eg: // );
+// 		9  document节点;
+
+// 3、节点操作:(通过父子关系)
+	
+// 	(1)childNodes:获取当前元素的所有节点;
+//  (2)nodeType:获取节点的种类，返回值为数字;
+//  (3)nodeValue:获取节点(文字)的内容;
+//  (4)nodeName:返回node节点名称;
+//  (5)nodeValue和innerHTML做为左值时的区别:nodeValue会把标签转换为字符串，innerHTML会将标签解析;
+//  (6)insertBefore(a,b):插入节点，将新的节点"a"插入到节点"b"之前;
+//  (7)removeChild:删除节点;
+// 		eg:
+			// var oBox = document.getElementById("box");
+			// console.log(oBox);
+			// console.log(oBox.childNodes);    
+			// //获取的节点为7个(text,span,text,div.con,text,p,text);
+			// console.log(oBox.childNodes[0].nodeType);
+			// //获取的节点数字为3(文本节点);
+			// console.log(oBox.childNodes[0].nodeValue);
+			// //获取的节点(文字)数值为 "天才 wes";
+			// console.log(oBox.childNodes[0].nodeName);
+			// //返回的node节点名称为 "#text";
+			// oBox.innerHTML = "<b>维斯布鲁克</b>"
+			// //打印到页面上的内容为 "维斯布鲁克"加粗;会覆盖掉div里面的全部节点;
+			// oBox.childNodes[2].nodeValue = "<b>维斯布鲁克</b>"
+			// //打印到页面上的内容为 "<b>维斯布鲁克</b>" 并替换了原来[0]中的内容;
+
+// 4、attribute属性:
+
+//	(1)attributes:获取所有当前首选中的节点的属性信息;
+//  (2)attributes.length:返回属性节点的个数;
+//  (3)atrributes[0]:返回第一个属性节点的值;
+//  (4)atrributes[].nodeType:返回属性名;
+//  (5)atrributes[].nodeName:返回属性名;
+//  (6)atrributes[].nodeValue:返回属性值;
+//		eg:
+			// var oBox = document.getElementById("box");
+			// console.log(oBox.attributes);
+			// //获取的内容为 这个div节点的所有属性内容;
+			// console.log(oBox.attributes.length);
+			// //获取的节点个数为 "2" ( 0:id; 1:width );
+			// console.log(oBox.attributes[1]);
+			// //获取的属性值为 (width="200");
+			// console.log(oBox.attributes[1].nodeType);
+			// //
+			// console.log(oBox.attributes[0].nodeName);
+			// //获取的值为 "id";
+			// console.log(oBox.attributes[1].nodeValue);
+			// //获取的值为 "200";
+
+
+// 5、既能获取又能设置的元素:
+//	(1)tagName:元素当前的标签名;
+//	(2)innerHTML innerText:当前元素的内容;
+//	(3)id:当前元素的id;
+//	(4)className:当前元素的class名;
+//  (5)href:当前的href值;
+
+// 6、innerHTML与innerText的区别:innerHTML可以获取标签，innerText只获取内容;
+
+// 7、偏移量:
+//      offset:根据父级有相对定位的元素计算的偏移量;
+
+// 		console.log(oBox.offsetTop);       上侧偏移值;
+// 		console.log(oBox.offsetLeft);      左侧偏移值;
+// 		console.log(oBox.offsetParent);    相对父元素的偏移值，若无就返回body;
+
+// 8、克隆:cloneNod(true);
+
+
+
+
+
+
+
+</script>
+</html>
